@@ -28,7 +28,7 @@ browser = [
 local = []
 
 [project.scripts]
-caption-ai = "caption_ai.main:main"
+caption-ai = "caption_ai.main:cli"
 
 [build-system]
 requires = ["hatchling"]
