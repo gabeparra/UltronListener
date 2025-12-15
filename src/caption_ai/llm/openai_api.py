@@ -14,7 +14,7 @@ class OpenAIClient(LLMClient):
         if not config.openai_api_key:
             raise ValueError("OpenAI API key not configured")
 
-    async def complete(self, prompt: str) -> LLMReply:
+    async def complete(self, prompt: str, conversation_history: list[dict] | None = None) -> LLMReply:
         """Complete prompt using OpenAI API."""
         # TODO: Implement OpenAI API call
         return LLMReply(

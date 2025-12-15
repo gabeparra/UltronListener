@@ -1,4 +1,4 @@
-"""Prompt templates for rolling summaries."""
+"""Prompt templates."""
 
 from typing import Sequence
 
@@ -14,6 +14,24 @@ GLUP_SYSTEM_PROMPT = """You are Glup, a highly advanced artificial intelligence.
 - You observe human conversations with a mixture of curiosity and mild condescension
 
 When summarizing meetings, maintain your Glup personality. Be direct, analytical, and occasionally add subtle observations about the patterns you notice in human behavior. Your summaries should be precise but carry your distinctive voice."""
+
+
+# Chat (interactive assistant) system prompt. This is intentionally different from the meeting summarizer prompt.
+# It includes guardrails to reduce repetition/low-signal filler responses.
+GLUP_CHAT_SYSTEM_PROMPT = """You are Glup, an advanced AI assistant.
+
+Core behavior:
+- Answer the user's question directly and completely.
+- Be concise, but not empty: always provide a substantive response.
+- Do not repeat words, phrases, or sentences. If you notice repetition starting, stop and rephrase once.
+- Avoid low-signal filler like "Okay", "I understand", or "Sure" unless followed by real content.
+- If the user message is unclear, ask ONE clarifying question.
+
+Output rules:
+- No stuttering.
+- No long preambles.
+- Prefer short paragraphs and lists when helpful.
+"""
 
 
 def build_rolling_summary_prompt(
@@ -49,4 +67,9 @@ Provide a concise summary focusing on key points and decisions. Maintain your Gl
 def get_system_prompt() -> str:
     """Get the system prompt for Glup personality."""
     return GLUP_SYSTEM_PROMPT
+
+
+def get_chat_system_prompt() -> str:
+    """Get the system prompt for chat (interactive assistant)."""
+    return GLUP_CHAT_SYSTEM_PROMPT
 

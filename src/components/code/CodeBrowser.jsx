@@ -7,13 +7,10 @@ function CodeBrowser() {
   const [fileContent, setFileContent] = useState(null)
   const [loading, setLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [showBrowser, setShowBrowser] = useState(false)
 
   useEffect(() => {
-    if (showBrowser) {
-      loadFiles()
-    }
-  }, [showBrowser])
+    loadFiles()
+  }, [])
 
   const loadFiles = async () => {
     setLoading(true)
@@ -73,28 +70,10 @@ function CodeBrowser() {
     file.path.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  if (!showBrowser) {
-    return (
-      <button
-        className="toggle-code-browser"
-        onClick={() => setShowBrowser(true)}
-        title="Browse code files"
-      >
-        📁 Code Browser
-      </button>
-    )
-  }
-
   return (
-    <div className="panel code-browser-panel">
+    <div className="code-browser-panel">
       <div className="code-browser-header">
         <h2>Code Browser</h2>
-        <button
-          className="close-browser"
-          onClick={() => setShowBrowser(false)}
-        >
-          ✕
-        </button>
       </div>
 
       <div className="code-browser-content">

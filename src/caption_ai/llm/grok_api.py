@@ -12,7 +12,7 @@ class GrokClient(LLMClient):
         if not config.grok_api_key:
             raise ValueError("Grok API key not configured")
 
-    async def complete(self, prompt: str) -> LLMReply:
+    async def complete(self, prompt: str, conversation_history: list[dict] | None = None) -> LLMReply:
         """Complete prompt using Grok API."""
         # TODO: Implement Grok API call
         return LLMReply(

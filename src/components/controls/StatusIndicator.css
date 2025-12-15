@@ -1,16 +1,13 @@
 .status-indicator {
-  position: fixed;
-  top: 20px;
-  right: 20px;
   background: #1a1a1a;
   border: 1px solid #333;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 0.9em;
-  z-index: 1000;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 0.8em;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
+  transition: all 0.2s;
 }
 
 .status-indicator.connected {
@@ -25,8 +22,8 @@
 
 .status-dot {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   animation: pulse 2s infinite;
 }

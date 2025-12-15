@@ -62,13 +62,13 @@ function BackendControl({ isConnected, onRefresh }) {
         )}
       </div>
       <div className="backend-actions">
-        <button 
-          onClick={handleRefresh} 
+        <button
+          onClick={handleRefresh}
           disabled={checking}
           className="refresh-btn"
           title="Refresh backend connection"
         >
-          {checking ? 'Checking...' : 'Refresh'}
+          {checking ? '⟳' : '🔄'}
         </button>
         {!isConnected && (
           <div className="backend-help">

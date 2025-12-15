@@ -77,3 +77,11 @@ yarn-error.log*
 .pnp.js
 web/dist/
 dist/
+
+# Docker Compose    
+
+
+docker-compose.yml
+
+gemma-3-4b-it-abliterated/
+gemma-3-4b-it-abliterated-GGUF/

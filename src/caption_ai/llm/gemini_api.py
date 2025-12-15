@@ -12,7 +12,7 @@ class GeminiClient(LLMClient):
         if not config.gemini_api_key:
             raise ValueError("Gemini API key not configured")
 
-    async def complete(self, prompt: str) -> LLMReply:
+    async def complete(self, prompt: str, conversation_history: list[dict] | None = None) -> LLMReply:
         """Complete prompt using Gemini API."""
         # TODO: Implement Gemini API call
         return LLMReply(

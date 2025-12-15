@@ -7,10 +7,20 @@ function ModelSelector({ currentModel, onModelChange }) {
   const [error, setError] = useState(null)
 
   const commonModels = [
+    // Fast models
     { name: 'llama3.2:3b', label: 'Fast (llama3.2:3b)', speed: 'fast', quality: 'good' },
+    { name: 'gemma3:1b', label: 'Gemma 3 1B', speed: 'fast', quality: 'good', size: '~2GB' },
+    
+    // Balanced models
     { name: 'mistral-nemo:12b', label: 'Balanced (mistral-nemo:12b)', speed: 'medium', quality: 'very good' },
+    { name: 'gemma3:4b', label: 'Gemma 3 4B', speed: 'medium', quality: 'very good', size: '~8GB' },
+    { name: 'gemma3:4b-abliterated', label: 'Gemma 3 4B Abliterated (UNCENSORED)', speed: 'medium', quality: 'very good', size: '~8GB', uncensored: true },
+    
+    // High quality models
     { name: 'llama3:70b', label: 'Slow/High Quality (llama3:70b)', speed: 'slow', quality: 'excellent' },
     { name: 'llama3.1:70b', label: 'Slow/Best Quality (llama3.1:70b)', speed: 'slow', quality: 'excellent' },
+    { name: 'gemma3:12b', label: 'Gemma 3 12B', speed: 'slow', quality: 'excellent', size: '~24GB' },
+    { name: 'gemma3:27b', label: 'Gemma 3 27B', speed: 'slow', quality: 'excellent', size: '~50GB' },
   ]
 
   useEffect(() => {
@@ -106,8 +116,14 @@ function ModelSelector({ currentModel, onModelChange }) {
               onClick={() => handleModelChange(model.name)}
               disabled={loading || currentModel === model.name}
             >
-              <div className="model-button-label">{model.label}</div>
-              <div className="model-button-desc">Quick responses, good quality</div>
+              <div className="model-button-label">
+                {model.label}
+                {model.uncensored && <span className="uncensored-badge">UNCENSORED</span>}
+              </div>
+              <div className="model-button-desc">
+                Quick responses, good quality
+                {model.size && ` • ${model.size}`}
+              </div>
             </button>
           ))}
         </div>
@@ -117,12 +133,18 @@ function ModelSelector({ currentModel, onModelChange }) {
           {commonModels.filter(m => m.speed === 'medium').map(model => (
             <button
               key={model.name}
-              className={`model-button ${currentModel === model.name ? 'active' : ''} ${loading ? 'loading' : ''}`}
+              className={`model-button ${currentModel === model.name ? 'active' : ''} ${loading ? 'loading' : ''} ${model.uncensored ? 'uncensored' : ''}`}
               onClick={() => handleModelChange(model.name)}
               disabled={loading || currentModel === model.name}
             >
-              <div className="model-button-label">{model.label}</div>
-              <div className="model-button-desc">Good balance of speed and quality</div>
+              <div className="model-button-label">
+                {model.label}
+                {model.uncensored && <span className="uncensored-badge">UNCENSORED</span>}
+              </div>
+              <div className="model-button-desc">
+                Good balance of speed and quality
+                {model.size && ` • ${model.size}`}
+              </div>
             </button>
           ))}
         </div>
@@ -136,11 +158,41 @@ function ModelSelector({ currentModel, onModelChange }) {
               onClick={() => handleModelChange(model.name)}
               disabled={loading || currentModel === model.name}
             >
-              <div className="model-button-label">{model.label}</div>
-              <div className="model-button-desc">Best quality, slower responses</div>
+              <div className="model-button-label">
+                {model.label}
+                {model.uncensored && <span className="uncensored-badge">UNCENSORED</span>}
+              </div>
+              <div className="model-button-desc">
+                Best quality, slower responses
+                {model.size && ` • ${model.size}`}
+              </div>
             </button>
           ))}
         </div>
+
+        {models.length > 0 && (
+          <div className="model-section">
+            <div className="section-header">📦 All Available Models</div>
+            <div className="available-models-list">
+              {models
+                .filter(m => !commonModels.find(cm => cm.name === m))
+                .map(modelName => (
+                  <button
+                    key={modelName}
+                    className={`model-button ${currentModel === modelName ? 'active' : ''} ${loading ? 'loading' : ''}`}
+                    onClick={() => handleModelChange(modelName)}
+                    disabled={loading || currentModel === modelName}
+                  >
+                    <div className="model-button-label">{modelName}</div>
+                    <div className="model-button-desc">Available in Ollama</div>
+                  </button>
+                ))}
+              {models.filter(m => !commonModels.find(cm => cm.name === m)).length === 0 && (
+                <div className="no-other-models">No other models available</div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {loading && (
