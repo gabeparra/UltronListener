@@ -163,6 +163,14 @@ function App() {
           </div>
         </TabPanel>
       </Tabs>
+      
+      <footer className="app-footer">
+        <div className="footer-content">
+          <span className="footer-text">Gabriel Parra</span>
+          <span className="footer-separator">|</span>
+          <span className="footer-text">© 2025</span>
+        </div>
+      </footer>
     </div>
   )
 }

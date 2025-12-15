@@ -4,15 +4,24 @@
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: 'Courier New', monospace;
   background: #0a0a0a;
   color: #e0e0e0;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 #root {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
